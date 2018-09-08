@@ -63,6 +63,8 @@ var _module_ = {
       CellRouter.route('signIn', function (parameter, to, from) {
         console.info(parameter, to, from);
       });
+      var drawer = document.querySelector('cell-drawer');
+      document.querySelector('.mdl-layout__drawer-button').addEventListener('click', drawer.open.bind(drawer));
     }
   }
 };

@@ -56,7 +56,15 @@ function outPackage(name) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -77,6 +85,18 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 var _module_ = {
+  './index.css': {
+    base: '.',
+    dependency: [],
+    factory: function factory(require, exports, module) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      exports.default = void 0;
+      var _default = ":host(:focus) {\n    outline: none;\n}\n\n.login-page {\n    width: 360px;\n    padding: 8% 0 0;\n    margin: auto;\n}\n.form {\n    position: relative;\n    z-index: 1;\n    background: #ffffff;\n    max-width: 360px;\n    margin: 0 auto 100px;\n    padding: 45px;\n    text-align: center;\n    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);\n}\n.form input {\n    font-family: \"Roboto\", sans-serif;\n    outline: 0;\n    background: #f2f2f2;\n    width: 100%;\n    border: 0;\n    margin: 0 0 15px;\n    padding: 15px;\n    box-sizing: border-box;\n    font-size: 14px;\n}\n.form button {\n    font-family: \"Roboto\", sans-serif;\n    text-transform: uppercase;\n    outline: 0;\n    background: #4caf50;\n    width: 100%;\n    border: 0;\n    padding: 15px;\n    color: #ffffff;\n    font-size: 14px;\n    -webkit-transition: all 0.3 ease;\n    transition: all 0.3 ease;\n    cursor: pointer;\n}\n.form button:hover,\n.form button:active,\n.form button:focus {\n    background: #43a047;\n}\n";
+      exports.default = _default;
+    }
+  },
   './index.html': {
     base: '.',
     dependency: [],
@@ -85,7 +105,7 @@ var _module_ = {
         value: true
       });
       exports.default = void 0;
-      var _default = "<template>\n    <form>\n        <input type=\"text\" name=\"user\" required=\"\" placeholder=\"User name\">\n        <input type=\"password\" name=\"password\" required=\"\" placeholder=\"Password\">\n\n        <input type=\"submit\">\n    </form>\n</template>\n";
+      var _default = "<template>\n    <div class=\"login-page\">\n        <div class=\"form\">\n            <form class=\"register-form\" method=\"post\" action=\"/user\">\n                <input type=\"text\" name=\"name\" required=\"\" placeholder=\"User name\">\n                <input type=\"password\" name=\"password\" required=\"\" placeholder=\"Password\">\n                <button type=\"submit\">Sign in</button>\n            </form>\n        </div>\n    </div>\n</template>\n";
       exports.default = _default;
     }
   },
@@ -101,6 +121,8 @@ var _module_ = {
       var _webCell = require('web-cell');
 
       var _index = _interopRequireDefault(require('./index.html'));
+
+      var _index2 = _interopRequireDefault(require('./index.css'));
 
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -118,10 +140,52 @@ var _module_ = {
 
           _classCallCheck(this, PageSignin);
 
-          (_this = _possibleConstructorReturn(this, _getPrototypeOf(PageSignin).call(this))).buildDOM(_index.default);
+          (_this = _possibleConstructorReturn(this, _getPrototypeOf(PageSignin).call(this))).buildDOM(_index.default, _index2.default);
 
           return _this;
         }
+
+        _createClass(PageSignin, [{
+          key: "connectedCallback",
+          value: function connectedCallback() {
+            this.on.call(this.shadowRoot, 'submit', 'form', this.onSubmit);
+          }
+        }, {
+          key: "onSubmit",
+          value: function () {
+            var _onSubmit = _asyncToGenerator(
+            /*#__PURE__*/
+            regeneratorRuntime.mark(function _callee(event) {
+              var form, response;
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      event.preventDefault();
+                      form = event.target;
+                      _context.next = 4;
+                      return fetch(form.action, {
+                        method: form.method,
+                        body: new FormData(form)
+                      });
+
+                    case 4:
+                      response = _context.sent;
+                      if (response.status > 299) window.alert(response.statusText);else ;
+
+                    case 6:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+
+            return function onSubmit(_x) {
+              return _onSubmit.apply(this, arguments);
+            };
+          }()
+        }]);
 
         return PageSignin;
       }(_wrapNativeSuper(HTMLElement));
