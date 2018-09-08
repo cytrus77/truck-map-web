@@ -1,0 +1,36 @@
+<!DocType HTML>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+
+    <title>Truck Map</title>
+
+    <link rel="stylesheet" href="node_modules/material-design-lite/material.min.css">
+    <link rel="stylesheet" href="source/style/index.css">
+    <link rel="stylesheet" href="node_modules/material-design-icons/iconfont/material-icons.css">
+    <link rel="stylesheet" href="source/style/font.css">
+
+    <script src="node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <script src="node_modules/resize-observer-polyfill/dist/ResizeObserver.global.js"></script>
+    <script src="node_modules/whatwg-fetch/fetch.js"></script>
+
+    <script src="node_modules/web-cell/dist/web-cell.js"></script>
+    <script src="node_modules/cell-router/dist/source.js"></script>
+</head><body>
+    <cell-loader base="dist/">
+        <cell-page path="page-signin"></cell-page>
+    </cell-loader>
+    <cell-router>
+        <cell-route path="signIn" tag="page-signin"></cell-route>
+    </cell-router>
+    <nav>
+        <a href="signIn">Sign in</a>
+    </nav>
+    <main>
+        Loading...
+    </main>
+    <script src="node_modules/material-design-lite/material.min.js"></script>
+    <script src="dist/page.js"></script>
+</body></html>
