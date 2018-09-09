@@ -3,5 +3,15 @@
         "icon": "lock_open",
         "title": "Sign in",
         "URL": "signIn"
+    },
+    {
+        "icon": "directions_car",
+        "title": "Truck",
+        "URL": "truck"
+    },
+    {
+        "icon": "navigation",
+        "title": "Route",
+        "URL": "route"
     }
 ]

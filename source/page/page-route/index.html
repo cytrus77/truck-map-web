@@ -1,0 +1,41 @@
+<template>
+    <style type="text/less">
+        @import (less, reference) 'node_modules/material-design-lite/dist/material.css';
+
+        :host(:focus) {  outline: none;  }
+
+        form {
+            background: white;
+            text-align: center;
+            height:     30%;
+        }
+        form > div:extend(.mdl-textfield, .mdl-textfield--floating-label) { }
+
+        input:extend(.mdl-textfield__input) {  outline: none;  }
+
+        label:extend(.mdl-textfield__label) { }
+
+        button:extend(.mdl-button, .mdl-button--raised, .mdl-button--colored) {
+            margin: 0.25rem;
+        }
+
+        iframe {
+            width:   100%;
+            height:  70%;
+        }
+    </style>
+    <form>
+        <div>
+            <input type="text" name="final_point" required>
+            <label>Final point</label>
+        </div>
+        <div>
+            <input type="text" name="via_point">
+            <label>Via point</label>
+        </div>
+        <button type="submit">Search</button>
+        <button type="button" id="start">Start</button>
+        <button type="button" id="end">End</button>
+    </form>
+    <iframe></iframe>
+</template>

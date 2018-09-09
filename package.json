@@ -17,7 +17,7 @@
     "lib": "source/page/"
   },
   "scripts": {
-    "format": "prettier --write \"source/**/*.{css,js,json}\"",
+    "format": "prettier --write \"source/**/*.{css,less,js,json}\"",
     "lint": "eslint source/ --fix",
     "build": "npm run format  &&  npm run lint  &&  web-cell pack",
     "dev": "web-server -o",

@@ -58,6 +58,7 @@ cell-drawer .avatar {
 
 .mdl-layout > main {
     height: calc(100% - 48px);
+    overflow: auto;
 }
 #blank {
     display: table;
