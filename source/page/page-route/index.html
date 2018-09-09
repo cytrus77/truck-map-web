@@ -5,9 +5,10 @@
         :host(:focus) {  outline: none;  }
 
         form {
-            background: white;
-            text-align: center;
-            height:     30%;
+            background:  white;
+            text-align:  center;
+            height:      33%;
+            min-height:  12rem;
         }
         form > div:extend(.mdl-textfield, .mdl-textfield--floating-label) { }
 
@@ -18,27 +19,23 @@
         input:focus + label:extend(
             .mdl-textfield--floating-label.is-focused .mdl-textfield__label
         ) { }
-        button:extend(.mdl-button, .mdl-button--raised, .mdl-button--colored) {
-            margin: 0.25rem;
-        }
+        button:extend(.mdl-button, .mdl-button--raised, .mdl-button--colored) { }
 
         iframe {
             width:   100%;
-            height:  70%;
+            height:  67%;
         }
     </style>
     <form>
         <div>
-            <input type="text" name="final_point" required>
-            <label>Final point</label>
+            <input type="text" name="destination" required>
+            <label>Destination</label>
         </div>
         <div>
-            <input type="text" name="via_point">
-            <label>Via point</label>
+            <input type="text" name="waypoint">
+            <label>Via</label>
         </div>
         <button type="submit">Search</button>
-        <button type="button" id="start">Start</button>
-        <button type="button" id="end">End</button>
     </form>
     <iframe></iframe>
 </template>

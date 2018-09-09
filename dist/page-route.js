@@ -85,8 +85,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var _module_ = {
-  './../map': {
-    base: './..',
+  './../service/map': {
+    base: './../service',
     dependency: [],
     factory: function factory(require, exports, module) {
       Object.defineProperty(exports, "__esModule", {
@@ -272,7 +272,7 @@ var _module_ = {
         value: true
       });
       exports.default = void 0;
-      var _default = "<template>\n    <style>button {\n  -webkit-tap-highlight-color: transparent;-webkit-tap-highlight-color: rgba(255, 255, 255, 0);\n}\nbutton {\n  background: transparent;border: none;border-radius: 2px;color: #000000;position: relative;height: 36px;margin: 0;min-width: 64px;padding: 0 16px;display: inline-block;font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;font-size: 14px;font-weight: 500;text-transform: uppercase;line-height: 1;letter-spacing: 0;overflow: hidden;will-change: box-shadow;transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);outline: none;cursor: pointer;text-decoration: none;text-align: center;line-height: 36px;vertical-align: middle;\n}\nbutton {\n  background: rgba(158, 158, 158, 0.2);box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\nform > div {\n  position: relative;font-size: 16px;display: inline-block;box-sizing: border-box;width: 300px;max-width: 100%;margin: 0;padding: 20px 0;\n}\ninput {\n  border: none;border-bottom: 1px solid rgba(0, 0, 0, 0.12);display: block;font-size: 16px;font-family: \"Helvetica\", \"Arial\", sans-serif;margin: 0;padding: 4px 0;width: 100%;background: none;text-align: left;color: inherit;\n}\nlabel {\n  bottom: 0;color: rgba(0, 0, 0, 0.26);font-size: 16px;left: 0;right: 0;pointer-events: none;position: absolute;display: block;top: 24px;width: 100%;overflow: hidden;white-space: nowrap;text-align: left;\n}\ninput:focus + label {\n  color: #3f51b5;font-size: 12px;top: 4px;visibility: visible;\n}\n:host(:focus) {\n  outline: none;\n}\nform {\n  background: white;\n  text-align: center;\n  height: 30%;\n}\ninput {\n  outline: none;\n}\nbutton {\n  margin: 0.25rem;\n}\niframe {\n  width: 100%;\n  height: 70%;\n}\n</style>\n    <form>\n        <div>\n            <input type=\"text\" name=\"final_point\" required=\"\">\n            <label>Final point</label>\n        </div>\n        <div>\n            <input type=\"text\" name=\"via_point\">\n            <label>Via point</label>\n        </div>\n        <button type=\"submit\">Search</button>\n        <button type=\"button\" id=\"start\">Start</button>\n        <button type=\"button\" id=\"end\">End</button>\n    </form>\n    <iframe></iframe>\n</template>\n";
+      var _default = "<template>\n    <style>button {\n  -webkit-tap-highlight-color: transparent;-webkit-tap-highlight-color: rgba(255, 255, 255, 0);\n}\nbutton {\n  background: transparent;border: none;border-radius: 2px;color: #000000;position: relative;height: 36px;margin: 0;min-width: 64px;padding: 0 16px;display: inline-block;font-family: \"Roboto\", \"Helvetica\", \"Arial\", sans-serif;font-size: 14px;font-weight: 500;text-transform: uppercase;line-height: 1;letter-spacing: 0;overflow: hidden;will-change: box-shadow;transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);outline: none;cursor: pointer;text-decoration: none;text-align: center;line-height: 36px;vertical-align: middle;\n}\nbutton {\n  background: rgba(158, 158, 158, 0.2);box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\n}\nform > div {\n  position: relative;font-size: 16px;display: inline-block;box-sizing: border-box;width: 300px;max-width: 100%;margin: 0;padding: 20px 0;\n}\ninput {\n  border: none;border-bottom: 1px solid rgba(0, 0, 0, 0.12);display: block;font-size: 16px;font-family: \"Helvetica\", \"Arial\", sans-serif;margin: 0;padding: 4px 0;width: 100%;background: none;text-align: left;color: inherit;\n}\nlabel {\n  bottom: 0;color: rgba(0, 0, 0, 0.26);font-size: 16px;left: 0;right: 0;pointer-events: none;position: absolute;display: block;top: 24px;width: 100%;overflow: hidden;white-space: nowrap;text-align: left;\n}\ninput:focus + label {\n  color: #3f51b5;font-size: 12px;top: 4px;visibility: visible;\n}\n:host(:focus) {\n  outline: none;\n}\nform {\n  background: white;\n  text-align: center;\n  height: 33%;\n  min-height: 12rem;\n}\ninput {\n  outline: none;\n}\niframe {\n  width: 100%;\n  height: 67%;\n}\n</style>\n    <form>\n        <div>\n            <input type=\"text\" name=\"destination\" required=\"\">\n            <label>Destination</label>\n        </div>\n        <div>\n            <input type=\"text\" name=\"waypoint\">\n            <label>Via</label>\n        </div>\n        <button type=\"submit\">Search</button>\n    </form>\n    <iframe></iframe>\n</template>\n";
       exports.default = _default;
     }
   },
@@ -289,7 +289,7 @@ var _module_ = {
 
       var _index = _interopRequireDefault(require('./index.html'));
 
-      var _map = require('../map');
+      var _map = require('../service/map');
 
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -317,9 +317,20 @@ var _module_ = {
         _createClass(PageRoute, [{
           key: "connectedCallback",
           value: function connectedCallback() {
+            var _this2 = this;
+
             this.on.call(this.shadowRoot, 'submit', 'form', this.onSubmit.bind(this));
-            this.$('#start')[0].onclick = this.toggle.bind(this, true);
-            this.$('#end')[0].onclick = this.toggle.bind(this, false);
+
+            document.onvisibilitychange = function () {
+              if (document.visibilityState === 'hidden') {
+                _this2.toggle(true);
+              } else if (window.confirm('Do you want to end the journey?')) _this2.toggle();
+            };
+          }
+        }, {
+          key: "disconnectedCallback",
+          value: function disconnectedCallback() {
+            document.onvisibilitychange = null;
           }
         }, {
           key: "onSubmit",
@@ -340,7 +351,7 @@ var _module_ = {
                     case 4:
                       current = _context5.sent;
                       _context5.next = 7;
-                      return Promise.all([(0, _map.searchCoord)(form.final_point.value, current.adcode), (0, _map.searchCoord)(form.via_point.value, current.adcode)]);
+                      return Promise.all([(0, _map.searchCoord)(form.destination.value, current.adcode), (0, _map.searchCoord)(form.waypoint.value, current.adcode)]);
 
                     case 7:
                       coord = _context5.sent;

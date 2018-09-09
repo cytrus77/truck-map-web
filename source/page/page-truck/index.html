@@ -1,13 +1,13 @@
 <template>
     <form method="POST" action="truck">
         <img src="source/image/delivery.png">
-        <h2>Truck profile</h2>
+        <h2>Truck Profile</h2>
         <div>
             <label>Size</label>
             <select name="size" required>
                 <option value="1">Mini</option>
                 <option value="2">Small</option>
-                <option value="3">Middle</option>
+                <option value="3">Medium</option>
                 <option value="4">Large</option>
             </select>
         </div>
@@ -24,11 +24,11 @@
             <label>Weight (ton)</label>
         </div>
         <div>
-            <input type="number" name="payload" required>
+            <input type="number" name="load" required>
             <label>Payload (ton)</label>
         </div>
         <div>
-            <input type="number" name="axle" required step="1" min="2">
+            <input type="number" name="axlesNum" required step="1" min="2">
             <label>Axle count</label>
         </div>
         <div>
@@ -38,7 +38,7 @@
             </select>
         </div>
         <div>
-            <input type="text" name="number" required pattern="[0-9A-Z]{5,6}">
+            <input type="text" name="numbe" required pattern="[0-9A-Z]{5,6}">
             <label>License number</label>
         </div>
         <button type="submit">Register</button>

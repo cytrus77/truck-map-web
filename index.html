@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 
-    <title>Truck Map</title>
+    <title>Truck Chain</title>
 
     <link rel="stylesheet" href="node_modules/material-design-lite/material.min.css">
     <link rel="stylesheet" href="source/style/index.css">
@@ -44,22 +44,30 @@
             <div tabindex="0" class="mdl-layout__drawer-button" slot="left">
                 <cell-icon name="menu"></cell-icon>
             </div>
-            Home
-            <cell-search placeholder="Enter your query..." slot="right"></cell-search>
+            <span>Truck-Chain</span>
         </cell-header>
         <cell-drawer class="demo-drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
             <header class="demo-drawer-header">
                 <img src="source/image/user.jpg" class="demo-avatar">
                 <div class="demo-avatar-dropdown">
-                    <span>hello@example.com</span>
+                    <span>(Please sign in...)</span>
                 </div>
             </header>
             <cell-navigation class="demo-navigation mdl-color--blue-grey-800"
                 src="source/index.json"></cell-navigation>
+            <footer>
+                Created by
+                <a target="_blank" href="https://github.com/orgs/git-hacker/teams/tech-addicts">
+                    Tech Addicts
+                </a>
+            </footer>
         </cell-drawer>
         <main>
             <div id="blank">
-                <h1>Truck<br>Map</h1>
+                <div>
+                    <img src="source/image/delivery.png">
+                    <h3>Welcome to <br>Truck-Chain!</h3>
+                </div>
             </div>
         </main>
     </div>

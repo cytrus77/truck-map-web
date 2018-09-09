@@ -16,11 +16,14 @@
   "directories": {
     "lib": "source/page/"
   },
+  "engines": {
+    "node": "^8.0.0"
+  },
   "scripts": {
     "format": "prettier --write \"source/**/*.{css,less,js,json}\"",
     "lint": "eslint source/ --fix",
     "build": "npm run format  &&  npm run lint  &&  web-cell pack",
-    "dev": "web-server -o",
+    "dev": "web-server -p LEANCLOUD_APP_PORT -o",
     "start": "web-server -p LEANCLOUD_APP_PORT",
     "precommit": "npm run build  &&  git add .",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,7 +33,7 @@
     "babel-polyfill": "^6.26.0",
     "cell-router": "^0.5.0",
     "koapache": "^1.0.2",
-    "material-cell": "^0.7.0",
+    "material-cell": "^0.8.0",
     "material-design-icons": "^3.0.1",
     "material-design-lite": "^1.3.0",
     "resize-observer-polyfill": "^1.5.0",

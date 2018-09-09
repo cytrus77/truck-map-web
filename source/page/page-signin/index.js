@@ -4,27 +4,39 @@ import template from './index.html';
 
 import style from './index.css';
 
+import { submit, navTo } from '../service/truck';
+
 export default class PageSignin extends HTMLElement {
     constructor() {
         super().buildDOM(template, style);
     }
 
     connectedCallback() {
-        this.on.call(this.shadowRoot, 'submit', 'form', this.onSubmit);
+        this.on.call(
+            this.shadowRoot,
+            'submit',
+            'form',
+            this.onSubmit.bind(this)
+        );
     }
 
     async onSubmit(event) {
         event.preventDefault();
 
-        const form = event.target;
+        try {
+            const user = await submit(event.target);
 
-        const response = await fetch(form.action, {
-            method: form.method,
-            body: new FormData(form)
-        });
+            this.dispatchEvent(
+                new CustomEvent('signIn', {
+                    bubbles: true,
+                    detail: user
+                })
+            );
 
-        if (response.status > 299) window.alert(response.statusText);
-        else;
+            await navTo('truck');
+        } catch (error) {
+            window.alert(error.message);
+        }
     }
 }
 

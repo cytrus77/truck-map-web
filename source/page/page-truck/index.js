@@ -4,7 +4,9 @@ import template from './index.html';
 
 import style from './index.less';
 
-import { districtOf } from '../map';
+import { districtOf } from '../service/map';
+
+import { submit } from '../service/truck';
 
 var province;
 
@@ -17,6 +19,23 @@ export default class PageTruck extends HTMLElement {
         province = province || (await districtOf());
 
         this.view.province.render(province);
+
+        this.on.call(
+            this.shadowRoot,
+            'submit',
+            'form',
+            this.onSubmit.bind(this)
+        );
+    }
+
+    async onSubmit(event) {
+        event.preventDefault();
+
+        try {
+            await submit(event.target);
+        } catch (error) {
+            window.alert(error.message);
+        }
     }
 }
 

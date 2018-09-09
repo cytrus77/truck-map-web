@@ -2,7 +2,7 @@ import { component } from 'web-cell';
 
 import template from './index.html';
 
-import { searchCoord, currentCoord } from '../map';
+import { searchCoord, currentCoord } from '../service/map';
 
 const during = [];
 
@@ -19,9 +19,16 @@ export default class PageRoute extends HTMLElement {
             this.onSubmit.bind(this)
         );
 
-        this.$('#start')[0].onclick = this.toggle.bind(this, true);
+        document.onvisibilitychange = () => {
+            if (document.visibilityState === 'hidden') {
+                this.toggle(true);
+            } else if (window.confirm('Do you want to end the journey?'))
+                this.toggle();
+        };
+    }
 
-        this.$('#end')[0].onclick = this.toggle.bind(this, false);
+    disconnectedCallback() {
+        document.onvisibilitychange = null;
     }
 
     async onSubmit(event) {
@@ -31,8 +38,8 @@ export default class PageRoute extends HTMLElement {
             current = await currentCoord();
 
         const coord = await Promise.all([
-            searchCoord(form.final_point.value, current.adcode),
-            searchCoord(form.via_point.value, current.adcode)
+            searchCoord(form.destination.value, current.adcode),
+            searchCoord(form.waypoint.value, current.adcode)
         ]);
 
         this.showRoute(

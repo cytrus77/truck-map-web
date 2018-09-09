@@ -54,17 +54,197 @@ function outPackage(name) {
         return module.exports;
     }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 var _module_ = {
+  './service/truck': {
+    base: './service',
+    dependency: [],
+    factory: function factory(require, exports, module) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      exports.truckCall = truckCall;
+      exports.submit = submit;
+      exports.currentUser = currentUser;
+      exports.navTo = navTo;
+      exports.signIn = signIn;
+
+      function truckCall(_x) {
+        return _truckCall.apply(this, arguments);
+      }
+
+      function _truckCall() {
+        _truckCall = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee(path) {
+          var method,
+              query,
+              body,
+              response,
+              _args = arguments;
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  method = _args.length > 1 && _args[1] !== undefined ? _args[1] : 'GET';
+                  query = _args.length > 2 ? _args[2] : undefined;
+                  body = _args.length > 3 ? _args[3] : undefined;
+                  query = query ? new URLSearchParams(query) : '';
+                  _context.next = 6;
+                  return fetch("http://27.102.107.55:5000/".concat(path, "?").concat(query), {
+                    method: method,
+                    body: body,
+                    mode: 'cors',
+                    credentials: 'include'
+                  });
+
+                case 6:
+                  response = _context.sent;
+
+                  if (!(response.status > 299)) {
+                    _context.next = 9;
+                    break;
+                  }
+
+                  throw Object.assign(new URIError(response.statusText), {
+                    code: response.status,
+                    response: response
+                  });
+
+                case 9:
+                  _context.next = 11;
+                  return response.json();
+
+                case 11:
+                  return _context.abrupt("return", _context.sent);
+
+                case 12:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this);
+        }));
+        return _truckCall.apply(this, arguments);
+      }
+
+      function submit(form) {
+        return truckCall(form.getAttribute('action'), form.getAttribute('method'), null, new FormData(form));
+      }
+
+      var user;
+
+      function currentUser() {
+        return _currentUser.apply(this, arguments);
+      }
+
+      function _currentUser() {
+        _currentUser = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee2() {
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.t0 = user;
+
+                  if (_context2.t0) {
+                    _context2.next = 5;
+                    break;
+                  }
+
+                  _context2.next = 4;
+                  return truckCall('user');
+
+                case 4:
+                  _context2.t0 = user = _context2.sent;
+
+                case 5:
+                  return _context2.abrupt("return", _context2.t0);
+
+                case 6:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2, this);
+        }));
+        return _currentUser.apply(this, arguments);
+      }
+
+      var router = document.querySelector('cell-router');
+
+      function navTo(route) {
+        return router.navTo(Object.assign(document.createElement('a'), {
+          href: route
+        }));
+      }
+
+      var userName = document.querySelector('cell-drawer > header span');
+
+      function signIn(user) {
+        userName.textContent = user.name;
+      }
+    }
+  },
   './index': {
     base: '.',
     dependency: [],
     factory: function factory(require, exports, module) {
+      var _truck = require('./service/truck');
+
       var CellRouter = customElements.get('cell-router');
       CellRouter.route('signIn', function (parameter, to, from) {
         console.info(parameter, to, from);
       });
       var drawer = document.querySelector('cell-drawer');
       document.querySelector('.mdl-layout__drawer-button').addEventListener('click', drawer.open.bind(drawer));
+      document.querySelector('cell-header > span').addEventListener('click', function () {
+        return window.location = '.';
+      });
+      document.addEventListener('signIn', function (event) {
+        return (0, _truck.signIn)(event.detail);
+      });
+
+      _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3() {
+        var user;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return (0, _truck.currentUser)();
+
+              case 3:
+                user = _context3.sent;
+                (0, _truck.signIn)(user);
+                (0, _truck.navTo)(user.car[0] ? 'route' : 'truck');
+                _context3.next = 11;
+                break;
+
+              case 8:
+                _context3.prev = 8;
+                _context3.t0 = _context3["catch"](0);
+
+                if (_context3.t0.code === 401) {
+                  (0, _truck.navTo)('signIn');
+                } else {
+                  window.alert(_context3.t0.message);
+                }
+
+              case 11:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this, [[0, 8]]);
+      }))();
     }
   }
 };

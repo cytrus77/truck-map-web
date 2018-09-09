@@ -56,10 +56,6 @@ function outPackage(name) {
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -84,7 +80,142 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 var _module_ = {
+  './../service/truck': {
+    base: './../service',
+    dependency: [],
+    factory: function factory(require, exports, module) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      exports.truckCall = truckCall;
+      exports.submit = submit;
+      exports.currentUser = currentUser;
+      exports.navTo = navTo;
+      exports.signIn = signIn;
+
+      function truckCall(_x) {
+        return _truckCall.apply(this, arguments);
+      }
+
+      function _truckCall() {
+        _truckCall = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee(path) {
+          var method,
+              query,
+              body,
+              response,
+              _args = arguments;
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  method = _args.length > 1 && _args[1] !== undefined ? _args[1] : 'GET';
+                  query = _args.length > 2 ? _args[2] : undefined;
+                  body = _args.length > 3 ? _args[3] : undefined;
+                  query = query ? new URLSearchParams(query) : '';
+                  _context.next = 6;
+                  return fetch("http://27.102.107.55:5000/".concat(path, "?").concat(query), {
+                    method: method,
+                    body: body,
+                    mode: 'cors',
+                    credentials: 'include'
+                  });
+
+                case 6:
+                  response = _context.sent;
+
+                  if (!(response.status > 299)) {
+                    _context.next = 9;
+                    break;
+                  }
+
+                  throw Object.assign(new URIError(response.statusText), {
+                    code: response.status,
+                    response: response
+                  });
+
+                case 9:
+                  _context.next = 11;
+                  return response.json();
+
+                case 11:
+                  return _context.abrupt("return", _context.sent);
+
+                case 12:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this);
+        }));
+        return _truckCall.apply(this, arguments);
+      }
+
+      function submit(form) {
+        return truckCall(form.getAttribute('action'), form.getAttribute('method'), null, new FormData(form));
+      }
+
+      var user;
+
+      function currentUser() {
+        return _currentUser.apply(this, arguments);
+      }
+
+      function _currentUser() {
+        _currentUser = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee2() {
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.t0 = user;
+
+                  if (_context2.t0) {
+                    _context2.next = 5;
+                    break;
+                  }
+
+                  _context2.next = 4;
+                  return truckCall('user');
+
+                case 4:
+                  _context2.t0 = user = _context2.sent;
+
+                case 5:
+                  return _context2.abrupt("return", _context2.t0);
+
+                case 6:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2, this);
+        }));
+        return _currentUser.apply(this, arguments);
+      }
+
+      var router = document.querySelector('cell-router');
+
+      function navTo(route) {
+        return router.navTo(Object.assign(document.createElement('a'), {
+          href: route
+        }));
+      }
+
+      var userName = document.querySelector('cell-drawer > header span');
+
+      function signIn(user) {
+        userName.textContent = user.name;
+      }
+    }
+  },
   './index.css': {
     base: '.',
     dependency: [],
@@ -93,7 +224,7 @@ var _module_ = {
         value: true
       });
       exports.default = void 0;
-      var _default = ":host(:focus) {\n    outline: none;\n}\n\n.login-page {\n    width: 360px;\n    padding: 8% 0 0;\n    margin: auto;\n}\n.form {\n    position: relative;\n    z-index: 1;\n    background: #ffffff;\n    max-width: 360px;\n    margin: 0 auto 100px;\n    padding: 45px;\n    text-align: center;\n    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);\n}\n.form input {\n    font-family: \"Roboto\", sans-serif;\n    outline: 0;\n    background: #f2f2f2;\n    width: 100%;\n    border: 0;\n    margin: 0 0 15px;\n    padding: 15px;\n    box-sizing: border-box;\n    font-size: 14px;\n}\n.form button {\n    font-family: \"Roboto\", sans-serif;\n    text-transform: uppercase;\n    outline: 0;\n    background: #4caf50;\n    width: 100%;\n    border: 0;\n    padding: 15px;\n    color: #ffffff;\n    font-size: 14px;\n    -webkit-transition: all 0.3 ease;\n    transition: all 0.3 ease;\n    cursor: pointer;\n}\n.form button:hover,\n.form button:active,\n.form button:focus {\n    background: #43a047;\n}\n";
+      var _default = ":host(:focus) {\n    outline: none;\n}\n\nmain {\n    display: table;\n    width: 100%;\n    height: 100%;\n}\ndiv {\n    display: table-cell;\n    vertical-align: middle;\n    padding: 3rem;\n}\nform {\n    background: white;\n    padding: 3rem;\n    text-align: center;\n    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);\n}\nform input {\n    font-family: \"Roboto\", sans-serif;\n    outline: 0;\n    background: #f2f2f2;\n    width: 100%;\n    border: 0;\n    margin: 0 0 15px;\n    padding: 15px;\n    box-sizing: border-box;\n    font-size: 14px;\n}\nform button {\n    font-family: \"Roboto\", sans-serif;\n    text-transform: uppercase;\n    outline: 0;\n    background: #4caf50;\n    width: 100%;\n    border: 0;\n    padding: 15px;\n    color: #ffffff;\n    font-size: 14px;\n    -webkit-transition: all 0.3 ease;\n    transition: all 0.3 ease;\n    cursor: pointer;\n}\nform button:hover,\nform button:active,\nform button:focus {\n    background: #43a047;\n}\n";
       exports.default = _default;
     }
   },
@@ -105,7 +236,7 @@ var _module_ = {
         value: true
       });
       exports.default = void 0;
-      var _default = "<template>\n    <div class=\"login-page\">\n        <div class=\"form\">\n            <form class=\"register-form\" method=\"post\" action=\"/user\">\n                <input type=\"text\" name=\"name\" required=\"\" placeholder=\"User name\">\n                <input type=\"password\" name=\"password\" required=\"\" placeholder=\"Password\">\n                <button type=\"submit\">Sign in</button>\n            </form>\n        </div>\n    </div>\n</template>\n";
+      var _default = "<template>\n    <main><div>\n        <form class=\"register-form\" method=\"post\" action=\"user\">\n            <input type=\"text\" name=\"name\" required=\"\" placeholder=\"User name\">\n            <input type=\"password\" name=\"password\" required=\"\" placeholder=\"Password\">\n            <button type=\"submit\">Sign in</button>\n        </form>\n    </div></main>\n</template>\n";
       exports.default = _default;
     }
   },
@@ -123,6 +254,8 @@ var _module_ = {
       var _index = _interopRequireDefault(require('./index.html'));
 
       var _index2 = _interopRequireDefault(require('./index.css'));
+
+      var _truck = require('../service/truck');
 
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -148,40 +281,51 @@ var _module_ = {
         _createClass(PageSignin, [{
           key: "connectedCallback",
           value: function connectedCallback() {
-            this.on.call(this.shadowRoot, 'submit', 'form', this.onSubmit);
+            this.on.call(this.shadowRoot, 'submit', 'form', this.onSubmit.bind(this));
           }
         }, {
           key: "onSubmit",
           value: function () {
             var _onSubmit = _asyncToGenerator(
             /*#__PURE__*/
-            regeneratorRuntime.mark(function _callee(event) {
-              var form, response;
-              return regeneratorRuntime.wrap(function _callee$(_context) {
+            regeneratorRuntime.mark(function _callee3(event) {
+              var user;
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
-                  switch (_context.prev = _context.next) {
+                  switch (_context3.prev = _context3.next) {
                     case 0:
                       event.preventDefault();
-                      form = event.target;
-                      _context.next = 4;
-                      return fetch(form.action, {
-                        method: form.method,
-                        body: new FormData(form)
-                      });
+                      _context3.prev = 1;
+                      _context3.next = 4;
+                      return (0, _truck.submit)(event.target);
 
                     case 4:
-                      response = _context.sent;
-                      if (response.status > 299) window.alert(response.statusText);else ;
+                      user = _context3.sent;
+                      this.dispatchEvent(new CustomEvent('signIn', {
+                        bubbles: true,
+                        detail: user
+                      }));
+                      _context3.next = 8;
+                      return (0, _truck.navTo)('truck');
 
-                    case 6:
+                    case 8:
+                      _context3.next = 13;
+                      break;
+
+                    case 10:
+                      _context3.prev = 10;
+                      _context3.t0 = _context3["catch"](1);
+                      window.alert(_context3.t0.message);
+
+                    case 13:
                     case "end":
-                      return _context.stop();
+                      return _context3.stop();
                   }
                 }
-              }, _callee, this);
+              }, _callee3, this, [[1, 10]]);
             }));
 
-            return function onSubmit(_x) {
+            return function onSubmit(_x2) {
               return _onSubmit.apply(this, arguments);
             };
           }()

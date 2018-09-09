@@ -1,13 +1,11 @@
 <template>
-    <div class="login-page">
-        <div class="form">
-            <form class="register-form" method="post" action="/user">
-                <input type="text" name="name" required
-                    placeholder="User name">
-                <input type="password" name="password" required
-                    placeholder="Password">
-                <button type="submit">Sign in</button>
-            </form>
-        </div>
-    </div>
+    <main><div>
+        <form class="register-form" method="post" action="user">
+            <input type="text" name="name" required
+                placeholder="User name">
+            <input type="password" name="password" required
+                placeholder="Password">
+            <button type="submit">Sign in</button>
+        </form>
+    </div></main>
 </template>
