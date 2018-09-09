@@ -24,7 +24,7 @@ document.addEventListener('signIn', event => signIn(event.detail));
 
         signIn(user);
 
-        navTo(user.car[0] ? 'route' : 'truck');
+        navTo(user.car ? 'route' : 'truck');
     } catch (error) {
         if (error.code === 401) {
             navTo('signIn');

@@ -224,7 +224,7 @@ var _module_ = {
               case 3:
                 user = _context3.sent;
                 (0, _truck.signIn)(user);
-                (0, _truck.navTo)(user.car[0] ? 'route' : 'truck');
+                (0, _truck.navTo)(user.car ? 'route' : 'truck');
                 _context3.next = 11;
                 break;
 
