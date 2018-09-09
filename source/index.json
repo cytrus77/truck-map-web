@@ -13,5 +13,10 @@
         "icon": "navigation",
         "title": "Route",
         "URL": "route"
+    },
+    {
+        "icon": "assessment",
+        "title": "Rank",
+        "URL": "rank"
     }
 ]

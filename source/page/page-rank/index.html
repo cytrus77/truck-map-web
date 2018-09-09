@@ -1,0 +1,47 @@
+<template>
+    <style type="text/less">
+        @import (less, reference) 'node_modules/material-design-lite/dist/material.css';
+
+        main {
+            padding:     0.75rem;
+            text-align:  center;
+        }
+
+        table:extend(
+            .mdl-data-table, .mdl-data-table--selectable, .mdl-shadow--2dp
+        ) {
+            counter-reset:  index;
+            width:          100%;
+        }
+        table > thead:extend(.mdl-data-table thead) { }
+
+        thead th:extend(.mdl-data-table th) { }
+
+        tbody > tr:extend(.mdl-data-table tbody tr) { }
+
+        table td:extend(.mdl-data-table td) { }
+
+        table td:first-child {  counter-increment: index;  }
+
+        table td:first-child::before {  content:  counter( index );  }
+
+        table th, table td {  text-align:  center !important;  }
+    </style>
+
+    <main>
+        <img src="source/image/delivery.png">
+        <h2>Driver rank</h2>
+        <table>
+            <thead><tr>
+                <th>#</th>
+                <th>Driver</th>
+                <th>Score</th>
+            </tr></thead>
+            <tbody data-array="rank"><tr>
+                <td></td>
+                <td>${view.name}</td>
+                <td>${view.score}</td>
+            </tr></tbody>
+        </table>
+    </main>
+</template>
